@@ -1,28 +1,108 @@
 package eightpuzzle;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.*;
+import java.util.List;
 
-public class EightPuzzle {
-    private static List<Solution> solutions = new ArrayList<Solution>();
+public class EightPuzzle extends JFrame{
+    private List<Solution> solutions = new ArrayList<Solution>();
     //0~10的阶乘值
-    private static int[] factorial={1,1,2,6,24,120,720,5040,40320,362880,3628800};
-    private static int n = 9;
+    private int[] factorial={1,1,2,6,24,120,720,5040,40320,362880,3628800};
+    private int n = 9;
     //初始状态序列
-    private static int[] origin;
+    private int[] origin;
     //目标状态序列
-    private static int[] goal;
-    private static int startId, goalId;
-    private static int max = 400000;
-    private static int[] parent = new int[max]; //每个结点的前结点
-    private static int[] direction = new int[max]; //到这个结点的方向
-    private static boolean[] checked = new boolean[max];
-    private static String result = "";
+    private int[] goal;
+    private int startId, goalId;
+    private int max = 400000;
+    private int[] parent = new int[max]; //每个结点的前结点
+    private int[] direction = new int[max]; //到这个结点的方向
+    private boolean[] checked = new boolean[max];
+    private String result = "";
+    private int zeroIdx;
 
 
+    // 于界面有关的
+    private JTextField[] blocks = new JTextField[9];
+    private JTextField originField;
+    private JTextField goalField;
+    private JTextField resultField;
+
+    private EightPuzzle(){
+        super("八数码求解器");
+        Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+        dimension.width = (int) (dimension.width * 0.2);
+        dimension.height = (int) (dimension.height * 0.42);
+
+        Box box = Box.createVerticalBox();
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 3));
+        for(int i = 0;  i < 9; i++) {
+            blocks[i] = new JTextField();
+            blocks[i].setHorizontalAlignment(JTextField.CENTER);
+            blocks[i].setFont(new Font("宋体", Font.PLAIN, 30));
+            panel.add(blocks[i]);
+        }
+        box.add(panel);
+
+        Box tip = Box.createVerticalBox();
+        JLabel label = new JLabel("欢迎！" + "\n" + "空格用0表示。");
+        tip.add(label);
+        JLabel originLabel = new JLabel("初始序列");
+        tip.add(originLabel);
+        originField = new JTextField();
+        tip.add(originField);
+        JLabel goalLabel = new JLabel("目标序列");
+        tip.add(goalLabel);
+        goalField = new JTextField();
+        tip.add(goalField);
+        JButton confirm = new JButton("开始");
+        confirm.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                if(originField.getText().isEmpty() || goalField.getText().isEmpty() ){
+                    JOptionPane.showMessageDialog(null, "请输入初始序列和目标序列", "输入为空！", JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+                    IO();
+                    if(!isSovable()){
+                        JOptionPane.showMessageDialog(null, "这两个状态之间不可达。", "不可达状态！", JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else{
+                        Solution start = new Solution(startId, n);
+                        solutions.add(start);
+                        heuristicSearch();
+                        drawRoute();
+                    }
+                }
+
+            }
+        });
+
+        tip.add(confirm);
+        resultField = new JTextField();
+        tip.add(resultField);
+        box.add(tip);
+
+        this.add(box);
+        this.setSize(dimension);
+        this.setVisible(true);
+        this.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent arg0) {
+                System.exit(0);
+            }
+        });
+    }
     /*
      * 康托展开式，实现全排列到自然数的映射
      */
-    private static int cantor(int[] numbers){
+    private int cantor(int[] numbers){
         int ans = 0, sum = 0;
         for(int i = 0; i < n-1; i++){
             for(int j = i + 1; j < n; j++)
@@ -42,7 +122,7 @@ public class EightPuzzle {
      *
      * 注意算逆序值时忽略空格0
      */
-    private static boolean isSovable(){
+    private boolean isSovable(){
         int originReverseValue = 0;
         int goalReverseValue = 0;
         for(int i = 1; i < n; i++){
@@ -59,7 +139,6 @@ public class EightPuzzle {
                 }
             }
         }
-//        System.out.println("reverseValue:" + originReverseValue + ", " + goalReverseValue);
         if(originReverseValue % 2 == goalReverseValue % 2){
             return true;
         }
@@ -67,17 +146,19 @@ public class EightPuzzle {
             return false;
     }
 
-    public static void IO(){
+    public void IO(){
         origin = new int[n];
         goal = new int[n];
-        Scanner in = new Scanner(System.in);
-        System.out.println("请输入初始状态（空格用0表示）：");
+        String originString = originField.getText();
         for(int i = 0; i < n; i++){
-            origin[i] = in.nextInt();
+            origin[i] = Integer.parseInt(originString.substring(i, i+1));
+            if(origin[i] == 0)
+                zeroIdx = i;
+            blocks[i].setText(String.valueOf(origin[i]));
         }
-        System.out.println("请输入终止状态（空格用0表示）：");
+        String goalString = goalField.getText();
         for(int i = 0; i < n; i++){
-            goal[i] = in.nextInt();
+            goal[i] = Integer.parseInt(goalString.substring(i, i+1));
         }
         startId = cantor(origin);
         goalId = cantor(goal);
@@ -87,7 +168,7 @@ public class EightPuzzle {
     /*
      * 按照解的启发式函数值从大到小排序，返回最好的解
      */
-    public static Solution getFittest() {
+    public Solution getFittest() {
         solutions.sort(new Comparator<Solution>() {
             @Override
             public int compare(Solution solution, Solution t1) {
@@ -101,30 +182,30 @@ public class EightPuzzle {
         return solutions.get(0);
     }
 
-    public static void printResult(int id){
+    public void printResult(int id){
         if(id == startId) {
             return;
         }
         printResult(parent[id]);
         if(direction[id] == 1) {
             result += "u";
-            System.out.println("up");
+            resultField.setText(resultField.getText() + "up ");
         }
         else if(direction[id] == 2){
             result += "d";
-            System.out.println("down");
+            resultField.setText(resultField.getText() + "down ");
         }
         else if(direction[id] == 3){
             result += "l";
-            System.out.println("left");
+            resultField.setText(resultField.getText() + "left ");
         }
         else{
             result += "r";
-            System.out.println("right");
+            resultField.setText(resultField.getText() + "right ");
         }
     }
 
-    public static boolean walk(int[] next, Solution solution, int direct){
+    public boolean walk(int[] next, Solution solution, int direct){
         int id = cantor(next);
         if(checked[id]){
             return id == goalId;
@@ -139,7 +220,7 @@ public class EightPuzzle {
     }
 
 
-    public static void heuristicSearch(){
+    public void heuristicSearch(){
         boolean find = false;
         while (solutions.size() != 0){
             Solution solution = getFittest();
@@ -206,23 +287,47 @@ public class EightPuzzle {
                 break;
         }
         printResult(goalId);
+//        resultField.setText(result);
         System.out.println("result:" + result);
+    }
+
+    private void swap(int i, int j){
+        String temp = blocks[i].getText();
+        blocks[i].setText(blocks[j].getText());
+        blocks[j].setText(temp);
+    }
+
+    private void drawRoute(){
+        for(int i = 0; i < result.length(); i++){
+            String d = result.substring(i, i+1);
+            if(d.contentEquals("u")){
+                swap(zeroIdx, zeroIdx-3);
+                zeroIdx -=3;
+            }
+            else if(d.contentEquals("d")){
+                swap(zeroIdx, zeroIdx+3);
+                zeroIdx += 3;
+            }
+            else if(d.contentEquals("l")){
+                swap(zeroIdx, zeroIdx-1);
+                zeroIdx -= 1;
+            }
+            else{
+                swap(zeroIdx, zeroIdx+1);
+                zeroIdx += 1;
+            }
+        }
     }
 
     public static void main(String[] args){
         System.out.println("Hello world!");
-
-        // 八数码问题
-        IO();
-
-        if(!isSovable()){
-            System.out.println("这两个状态之间不可达。");
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         }
-        else{
-            Solution start = new Solution(startId, n);
-            solutions.add(start);
-
-            heuristicSearch();
+        catch (Exception e) {
+            System.out.println(e.toString());
         }
+        EightPuzzle eightPuzzle = new EightPuzzle();
+        eightPuzzle.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }

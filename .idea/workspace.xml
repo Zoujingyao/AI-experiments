@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b61dee8e-74c9-4d9c-a687-1c7c62bf8daf" name="Default Changelist" comment="" />
+    <list default="true" id="b61dee8e-74c9-4d9c-a687-1c7c62bf8daf" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AI/eightpuzzle/EightPuzzle$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AI/eightpuzzle/EightPuzzle$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AI/eightpuzzle/EightPuzzle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AI/eightpuzzle/EightPuzzle.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/eightpuzzle/EightPuzzle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/eightpuzzle/EightPuzzle.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +26,7 @@
   </component>
   <component name="ProjectId" id="1bW4pZVbnGvZOPqPP58CBCOW4sn" />
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../GA" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../pathOptimization" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -34,9 +40,35 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.EightPuzzle">
     <configuration name="EightPuzzle" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="eightpuzzle.EightPuzzle" />
+      <module name="AI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="eightpuzzle.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="home" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="eightpuzzle.home" />
+      <module name="AI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="eightpuzzle.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="eightpuzzle.test" />
       <module name="AI" />
       <extension name="coverage">
         <pattern>
@@ -51,6 +83,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.EightPuzzle" />
+        <item itemvalue="Application.test" />
+        <item itemvalue="Application.home" />
       </list>
     </recent_temporary>
   </component>
@@ -66,5 +100,18 @@
       <updated>1588734698438</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
