@@ -95,10 +95,24 @@ public class EightPuzzle extends JFrame{
         this.setVisible(true);
         this.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent arg0) {
+                EightPuzzle.this.dispose();
                 System.exit(0);
             }
         });
     }
+
+    public static void main(String[] args){
+        System.out.println("Hello world!");
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+        }
+        EightPuzzle eightPuzzle = new EightPuzzle();
+        eightPuzzle.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
     /*
      * 康托展开式，实现全排列到自然数的映射
      */
@@ -162,7 +176,7 @@ public class EightPuzzle extends JFrame{
         }
         startId = cantor(origin);
         goalId = cantor(goal);
-        System.out.println("startId, goalId:" + startId + ", " + goalId);
+//        System.out.println("startId, goalId:" + startId + ", " + goalId);
     }
 
     /*
@@ -210,7 +224,6 @@ public class EightPuzzle extends JFrame{
         if(checked[id]){
             return id == goalId;
         }
-//        System.out.println("id；" + id);
         checked[id] = true;
         parent[id] = solution.getId();
         direction[id] = direct;
@@ -218,7 +231,6 @@ public class EightPuzzle extends JFrame{
         solutions.add(newSolution);
         return id == goalId;
     }
-
 
     public void heuristicSearch(){
         boolean find = false;
@@ -288,7 +300,7 @@ public class EightPuzzle extends JFrame{
         }
         printResult(goalId);
 //        resultField.setText(result);
-        System.out.println("result:" + result);
+//        System.out.println("result:" + result);
     }
 
     private void swap(int i, int j){
@@ -298,36 +310,34 @@ public class EightPuzzle extends JFrame{
     }
 
     private void drawRoute(){
-        for(int i = 0; i < result.length(); i++){
-            String d = result.substring(i, i+1);
-            if(d.contentEquals("u")){
-                swap(zeroIdx, zeroIdx-3);
-                zeroIdx -=3;
+        // 开启多线程，更新显示进程，实现实时刷新
+        new Thread(new Runnable() {
+            public void run() {
+                for(int i = 0; i < result.length(); i++){
+                    String d = result.substring(i, i+1);
+                    if(d.contentEquals("u")){
+                        swap(zeroIdx, zeroIdx-3);
+                        zeroIdx -=3;
+                    }
+                    else if(d.contentEquals("d")){
+                        swap(zeroIdx, zeroIdx+3);
+                        zeroIdx += 3;
+                    }
+                    else if(d.contentEquals("l")){
+                        swap(zeroIdx, zeroIdx-1);
+                        zeroIdx -= 1;
+                    }
+                    else{
+                        swap(zeroIdx, zeroIdx+1);
+                        zeroIdx += 1;
+                    }
+                    try{
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
-            else if(d.contentEquals("d")){
-                swap(zeroIdx, zeroIdx+3);
-                zeroIdx += 3;
-            }
-            else if(d.contentEquals("l")){
-                swap(zeroIdx, zeroIdx-1);
-                zeroIdx -= 1;
-            }
-            else{
-                swap(zeroIdx, zeroIdx+1);
-                zeroIdx += 1;
-            }
-        }
-    }
-
-    public static void main(String[] args){
-        System.out.println("Hello world!");
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        }
-        catch (Exception e) {
-            System.out.println(e.toString());
-        }
-        EightPuzzle eightPuzzle = new EightPuzzle();
-        eightPuzzle.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        }).start();
     }
 }
