@@ -2,9 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b61dee8e-74c9-4d9c-a687-1c7c62bf8daf" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/expertsystem/AnimalIdentificationExpertSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/expertsystem/Rule.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/expertsystem/RuleRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AI/eightpuzzle/EightPuzzle$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AI/eightpuzzle/EightPuzzle$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/AI/eightpuzzle/EightPuzzle$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AI/eightpuzzle/EightPuzzle$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/AI/eightpuzzle/EightPuzzle$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AI/eightpuzzle/EightPuzzle$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/AI/eightpuzzle/EightPuzzle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/AI/eightpuzzle/EightPuzzle.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/eightpuzzle/EightPuzzle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/eightpuzzle/EightPuzzle.java" afterDir="false" />
     </list>
@@ -28,6 +30,13 @@
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../pathOptimization" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\projects\IdeaProjects\AI\src\images" />
+      <recent name="D:\projects\IdeaProjects\AI\src" />
+      <recent name="D:\projects\IdeaProjects\AI\src\expertsystem" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -40,8 +49,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.EightPuzzle">
-    <configuration name="EightPuzzle" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.AnimalIdentificationExpertSystem">
+    <configuration name="AnimalIdentificationExpertSystem" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="expertsystem.AnimalIdentificationExpertSystem" />
+      <module name="AI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="expertsystem.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EightPuzzle" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="eightpuzzle.EightPuzzle" />
       <module name="AI" />
       <extension name="coverage">
@@ -54,12 +76,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="home" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="eightpuzzle.home" />
+    <configuration name="RuleRepository" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="expertsystem.RuleRepository" />
       <module name="AI" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="eightpuzzle.*" />
+          <option name="PATTERN" value="expertsystem.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="expertsystem.Test" />
+      <module name="AI" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="expertsystem.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -82,9 +117,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.EightPuzzle" />
+        <item itemvalue="Application.AnimalIdentificationExpertSystem" />
+        <item itemvalue="Application.RuleRepository" />
+        <item itemvalue="Application.Test" />
         <item itemvalue="Application.test" />
-        <item itemvalue="Application.home" />
       </list>
     </recent_temporary>
   </component>

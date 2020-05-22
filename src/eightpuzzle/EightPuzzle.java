@@ -102,7 +102,7 @@ public class EightPuzzle extends JFrame{
     }
 
     public static void main(String[] args){
-        System.out.println("Hello world!");
+//        System.out.println("Hello world!");
         try {
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         }
@@ -110,7 +110,7 @@ public class EightPuzzle extends JFrame{
             System.out.println(e.toString());
         }
         EightPuzzle eightPuzzle = new EightPuzzle();
-        eightPuzzle.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        eightPuzzle.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     /*
