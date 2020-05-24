@@ -5,12 +5,14 @@ import java.util.*;
 public class RuleRepository {
     List<Rule> rules = new ArrayList<>();
     Set<Integer> conditions = new TreeSet<>();
+    String animals = "";
 
     // 构造函数，传入用户输入的条件编号
     public RuleRepository(int[] conditions){
         for(int i = 0; i < conditions.length; i++) {
             this.conditions.add(conditions[i]);
         }
+        init();
     }
 
     // 初始化规则库，初始有15条规则，总共能识别7种动物
@@ -49,10 +51,19 @@ public class RuleRepository {
             Rule rule = rules.get(i);
             if(rule.isSatisfied(conditions.toArray())){
                 result += rule.toString();
+                int con = rule.getConclusion();
                 // 注意：满足的话要把结论加到已知条件中，且要维持有序（条件序列满足拓扑结构）
                 conditions.add(rule.getConclusion());
+                if(con >= 24){
+                    animals += con;
+                    animals += " ";
+                }
             }
         }
         return result;
+    }
+
+    public String getAnimals() {
+        return animals;
     }
 }
