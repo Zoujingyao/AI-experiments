@@ -9,6 +9,8 @@
 动物识别专家系统是流行的专家系统实验模型，它用产生式规则来表示知识，共15条规则、可以识别七种动物，这些规则既少又简单，可以改造他们，也可以加进新的规则，还可以用来识别其他东西的新规则来取代这些规则。
 解题思路和过程见博客：https://blog.csdn.net/qq_40486952/article/details/106313104
 结果演示：
-![image](https://user-images.githubusercontent.com/44741730/110198734-99c24180-7e8f-11eb-9710-a1e965f578dc.png)
+![image](https://user-images.githubusercontent.com/44741730/110198773-d2fab180-7e8f-11eb-906d-cd34e0ef8c0c.png)
+
+
 
 
